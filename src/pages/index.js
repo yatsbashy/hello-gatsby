@@ -3,10 +3,15 @@ import { css } from "@emotion/core"
 import { Link, graphql } from "gatsby"
 import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 export default ({ data }) => {
 	return (
 		<Layout>
+			<SEO
+				title={data.site.siteMetadata.title}
+				description={data.site.siteMetadata.description}
+			/>
 			<div>
 				<h1
 					css={css`
@@ -51,6 +56,12 @@ export default ({ data }) => {
 
 export const query = graphql`
 	query {
+		site {
+			siteMetadata {
+				description
+				title
+			}
+		}
 		allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
 			totalCount
 			edges {
